@@ -1,0 +1,28 @@
+# Stage 1: Build with Gradle
+FROM eclipse-temurin:17-jdk AS build
+WORKDIR /app
+
+# Copy build files first (cached if unchanged)
+COPY build.gradle settings.gradle gradlew ./
+COPY gradle gradle
+RUN chmod +x gradlew
+
+# Copy source code (changes frequently)
+COPY src src
+
+# Build the application (Gradle distribution cached from previous layer)
+RUN ./gradlew bootJar --no-daemon -x test
+
+# Stage 2: Runtime
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+# Create output directory for mounting model results
+RUN mkdir -p /app/output
+
+# Copy the built jar
+COPY --from=build /app/build/libs/ai-assistant-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

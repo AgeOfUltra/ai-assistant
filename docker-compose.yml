@@ -1,0 +1,34 @@
+  # Docker Compose for AI Assistant standalone testing
+# Run from this directory: docker-compose up --build
+# Or start only PostgreSQL for IntelliJ local development: docker-compose up postgres
+
+version: "3.8"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: ai-assistant-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ai_assistant
+      POSTGRES_USER: ${DB_USER:-ai}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-ai}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./src/main/resources/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-ai} -d ai_assistant"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - ai-network
+volumes:
+  postgres-data:
+
+networks:
+  ai-network:
+    driver: bridge

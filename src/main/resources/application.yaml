@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: ai-assistant
+  ai:
+    google:
+      genai:
+        api-key: ${GOOGLE_API_KEY}
+        chat:
+          temperature: 0.5          # was 0.7; lower = fewer invented details
+          model: gemini-3.1-flash-lite
+        embedding:
+          api-key: ${GOOGLE_API_KEY}
+          text:
+            model: gemini-embedding-001
+
+    vectorstore:
+      pgvector:
+        dimensions: 3072
+        index-type: NONE
+        distance-type: COSINE_DISTANCE
+        initialize-schema: false
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/ai_assistant}
+    username: ${DB_USER:ai}
+    password: ${DB_PASSWORD:ai}
+    driver-class-name: org.postgresql.Driver
+
+  config:
+    import: optional:file:.env[.properties]
+rag:
+  data-dir: ${RAG_DATA_DIR:./src/main/resources/output/}
+  manifest-path: ${RAG_MANIFEST_PATH:./src/main/resources/.ingest-manifest.properties}
+  top-k: 5
+  similarity-threshold: 0.5         # was 0.75; numeric CSV summaries rarely score that high
+
+logging:
+  level:
+    com.ai.assistant: INFO
+    org.springframework.ai: INFO
+
+server:
+  port: 8081
