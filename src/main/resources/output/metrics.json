@@ -1,0 +1,167 @@
+{
+  "data_log": {
+    "rows_total": 65943,
+    "rows_with_actuals_before_20nov": 63412,
+    "rows_used": 62850,
+    "n_train": 51970,
+    "n_val": 6916,
+    "n_test": 3964,
+    "modelA_vs_B_note": "B evaluated after inbound landing; A is schedule-only",
+    "pass_through": [
+      {
+        "turn_bucket": "(0, 40]",
+        "n": 7474,
+        "pass_through_ratio": 1.021
+      },
+      {
+        "turn_bucket": "(40, 50]",
+        "n": 7213,
+        "pass_through_ratio": 0.928
+      },
+      {
+        "turn_bucket": "(50, 60]",
+        "n": 4582,
+        "pass_through_ratio": 0.994
+      },
+      {
+        "turn_bucket": "(60, 75]",
+        "n": 1987,
+        "pass_through_ratio": 0.896
+      },
+      {
+        "turn_bucket": "(75, 90]",
+        "n": 1888,
+        "pass_through_ratio": 0.731
+      },
+      {
+        "turn_bucket": "(90, 120]",
+        "n": 2892,
+        "pass_through_ratio": 0.607
+      },
+      {
+        "turn_bucket": "(120, 180]",
+        "n": 3379,
+        "pass_through_ratio": 0.339
+      },
+      {
+        "turn_bucket": "(180, 600]",
+        "n": 4624,
+        "pass_through_ratio": 0.096
+      }
+    ],
+    "rotation_scored_g9_flights": 2185,
+    "rotation_other_airlines_not_scored": 2032
+  },
+  "test_metrics": {
+    "A": {
+      "gt15": {
+        "auc": 0.8148,
+        "pr_auc": 0.6957,
+        "brier": 0.1715,
+        "ece": 0.0635,
+        "base_rate": 0.3681,
+        "top10pct_precision": 0.7955,
+        "top10pct_lift": 2.16
+      },
+      "gt60": {
+        "auc": 0.7617,
+        "pr_auc": 0.2044,
+        "brier": 0.067,
+        "ece": 0.0315,
+        "base_rate": 0.0764,
+        "top10pct_precision": 0.2247,
+        "top10pct_lift": 2.94
+      },
+      "p50_mae": 15.26,
+      "p50_pinball": 7.63,
+      "p90_pinball": 5.14,
+      "p90_coverage": 0.958,
+      "gt15_calibrated": {
+        "auc": 0.8145,
+        "pr_auc": 0.6851,
+        "brier": 0.1771,
+        "ece": 0.0908,
+        "base_rate": 0.3681,
+        "top10pct_precision": 0.8005,
+        "top10pct_lift": 2.17
+      },
+      "gt60_calibrated": {
+        "auc": 0.7609,
+        "pr_auc": 0.1932,
+        "brier": 0.0691,
+        "ece": 0.0436,
+        "base_rate": 0.0764,
+        "top10pct_precision": 0.2172,
+        "top10pct_lift": 2.84
+      },
+      "features_used": {
+        "n_features": 39,
+        "bookings_profile": false,
+        "bookings_exact": true
+      },
+      "baseline_route_hist_auc_gt15": 0.7414,
+      "baseline_station_hour_auc_gt15": 0.7561,
+      "baseline_global_median_mae": 18.73
+    },
+    "B": {
+      "gt15": {
+        "auc": 0.9221,
+        "pr_auc": 0.8948,
+        "brier": 0.1055,
+        "ece": 0.0284,
+        "base_rate": 0.3681,
+        "top10pct_precision": 1.0,
+        "top10pct_lift": 2.72
+      },
+      "gt60": {
+        "auc": 0.9091,
+        "pr_auc": 0.6506,
+        "brier": 0.041,
+        "ece": 0.0136,
+        "base_rate": 0.0764,
+        "top10pct_precision": 0.4672,
+        "top10pct_lift": 6.11
+      },
+      "p50_mae": 9.53,
+      "p50_pinball": 4.76,
+      "p90_pinball": 3.2,
+      "p90_coverage": 0.907,
+      "gt15_calibrated": {
+        "auc": 0.9215,
+        "pr_auc": 0.8857,
+        "brier": 0.1069,
+        "ece": 0.0358,
+        "base_rate": 0.3681,
+        "top10pct_precision": 1.0,
+        "top10pct_lift": 2.72
+      },
+      "gt60_calibrated": {
+        "auc": 0.9085,
+        "pr_auc": 0.6314,
+        "brier": 0.0416,
+        "ece": 0.018,
+        "base_rate": 0.0764,
+        "top10pct_precision": 0.4672,
+        "top10pct_lift": 6.11
+      },
+      "features_used": {
+        "n_features": 45,
+        "bookings_profile": false,
+        "bookings_exact": true
+      },
+      "baseline_route_hist_auc_gt15": 0.7414,
+      "baseline_station_hour_auc_gt15": 0.7561,
+      "baseline_global_median_mae": 18.73,
+      "baseline_persistence_auc_gt15": 0.7293,
+      "baseline_physics_eff_turn_auc_gt15": 0.7223,
+      "n_nontrivial_test": 2960,
+      "gt15_auc_nontrivial_subset": 0.8754,
+      "baseline_physics_auc_nontrivial_subset": 0.4727,
+      "gt60_auc_nontrivial_subset": 0.8606,
+      "gt15_auc_tight_turn_subset": 0.8709,
+      "modelA_auc_same_nontrivial_subset": 0.7941,
+      "n_tight_turn_test": 1697,
+      "modelA_auc_tight_turn_subset": 0.7442
+    }
+  }
+}

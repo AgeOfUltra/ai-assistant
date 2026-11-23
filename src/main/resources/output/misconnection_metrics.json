@@ -1,0 +1,28 @@
+{
+  "auc": 0.9569,
+  "pr_auc": 0.9345,
+  "brier": 0.0725,
+  "ece": 0.0093,
+  "base_rate": 0.336,
+  "top10pct_precision": 0.9994,
+  "top10pct_lift": 2.97,
+  "tight_conn": {
+    "auc": 0.8646,
+    "pr_auc": 0.7653,
+    "brier": 0.1295,
+    "ece": 0.0575,
+    "base_rate": 0.3019,
+    "top10pct_precision": 0.8959,
+    "top10pct_lift": 2.97
+  },
+  "validation": {
+    "auc": 0.9716,
+    "pr_auc": 0.956,
+    "brier": 0.0569,
+    "ece": 0.0118,
+    "base_rate": 0.3399,
+    "top10pct_precision": 0.9969,
+    "top10pct_lift": 2.93
+  },
+  "baseline_gap_auc": 0.4931
+}
