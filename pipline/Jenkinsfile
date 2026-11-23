@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages{
+        stage("Clean Up"){
+            steps {
+                deleteDir()
+            }
+        }
+        stage("Clone Repo"){
+            steps {
+                sh "git clone https://github.com/AgeOfUltra/ai-assistant.git"
+            }
+        }
+        stage("Build") {
+            steps {
+                dir("ai-assistant"){
+                    sh "./gradlew clean build"
+                }
+            }
+        }
+        stage("Test") {
+            steps{
+                dir("ai-assistant"){
+                    sh "./gradlew test"
+                }
+            }
+        }
+    }
+}

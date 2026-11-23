@@ -12,7 +12,6 @@ build/
 # Build output
 out/
 *.class
-*.jar
 *.war
 *.ear
 
